@@ -1,0 +1,168 @@
+:root {
+  --color-danger: orangered;
+  --color-dark: #333333;
+  --color-white: #ffffff;
+  --color-orange: orangered;
+  --light-blue: blue;
+  /* --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --font-size: 1.6rem; */
+  /* Add more variables as needed */
+}
+.container{
+  margin: 0 10%;
+}
+
+
+// ----------------------LOGO CSS---------------------------
+.logo a{
+  text-decoration: none;
+}
+.logo a h2 {
+  width: 25%;
+  color: #fff;
+  cursor: pointer;
+  span {
+    color: var(--color-orange);
+  }
+}
+// ---------------------Button css--------------------------
+.anmoBTN2 {
+  cursor: pointer;
+  font-family: "Kumbh Sans", sans-serif;
+  position: relative;
+  display: inline-block;
+  padding: 0px 20px;
+  height: 38px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 38px;
+  text-transform: capitalize;
+  z-index: 1;
+  transition: all ease 350ms;
+  -moz-transition: all ease 350ms;
+  -webkit-transition: all ease 350ms;
+}
+.anmoBTN2:hover {
+  color: var(--color-dark);
+  border-color: var(--color-orange);
+}
+.anmoBTN2:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: var(--color-dark);
+  border-radius: inherit;
+  -webkit-transition: all ease 350ms;
+  transition: all ease 350ms;
+}
+.anmoBTN2:hover:before {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  -webkit-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5);
+}
+.anmoBTN2:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  border-radius: inherit;
+  -webkit-transition: all ease 350ms;
+  transition: all ease 350ms;
+  border: 1px solid var(--color-orange);
+  -webkit-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+  background: transparent;
+}
+.anmoBTN2:hover:after {
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+
+// ----------------Carts header css---------------------
+.pageHeadingMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .pageHeading {
+    font-weight: 300;
+    font-size: 1.8rem;
+  }
+}
+
+// ------------------horizontal Line css----------------------
+.hr {
+  border: none; /* Remove the default border */
+  height: 1.2px; /* Set thickness */
+  background-color: #b3b3b3; /* Set color (dark gray) */
+  font-weight: 300;
+  width: 100%; /* Set width */
+  margin: 10px auto;
+}
+
+.product--image {
+  width: 100%;
+  height: 65%;
+}
+
+h3{
+  font-weight: 300;
+    font-size: 1.8rem
+}
+
+.elementCenter{
+  display: flex;
+  justify-content: center;
+}
+
+
+.anmoBTN2WithFull{
+  width: 100%;
+    border-radius: unset;
+}
+.profileName{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust width */
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light gray track */
+  border-radius: 10px;
+}
+
+/* Scrollbar Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Darker gray handle */
+  border-radius: 10px;
+}
+
+/* Scrollbar Handle on Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.mainWrapper{
+  // margin-top: 5rem;
+}
