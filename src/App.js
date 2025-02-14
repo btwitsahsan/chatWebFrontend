@@ -17,7 +17,7 @@ import Users from "./pages/users/Users";
 
 function App() {
 
-    const { isLoggedIn } = useSelector((state) => state.auth);
+    // const { isLoggedIn } = useSelector((state) => state.auth);
   
   axios.defaults.withCredentials = true;
   const dispatch = useDispatch();
@@ -51,11 +51,11 @@ function App() {
       <Routes>
         {/* Define the parent route */}
         <Route path="/" element={<ChildRoute />}>
-          <Route index element={isLoggedIn? <Users />: <Login/>} />
+          {/* <Route index element={isLoggedIn? <Users />: <Login/>} /> */}
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register />} />
-          <Route path="/chat" element={isLoggedIn? <Chat />: <Login/>}/>
-          <Route path="/profile" element={isLoggedIn?<Profile /> : <Login/>} />
+          {/* <Route path="/chat" element={isLoggedIn? <Chat />: <Login/>}/> */}
+          {/* <Route path="/profile" element={isLoggedIn?<Profile /> : <Login/>} /> */}
         </Route>
       </Routes>
       <Footer />
