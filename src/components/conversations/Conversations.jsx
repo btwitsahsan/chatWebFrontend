@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./conversations.css";
 import axios from "axios";
+import { getUsers } from "../../networks/Apis";
 
 const Conversations = ({ conversations, currentUser }) => {
   const [user, setUser] = useState(null);
@@ -9,16 +10,10 @@ const Conversations = ({ conversations, currentUser }) => {
     const friendId = conversations.members.find((m) => m !== currentUser._id);
 
     const getUser = async () => {
-      try {
-        const res = await axios.post(
-          "http://localhost:4000/api/users/getUserById?userId=" + friendId
-        );
+      const res = await getUsers(friendId);
 
-        if (res.data && typeof res.data === "object") {
-          setUser(res.data); // Ensure res.data is the user object
-        }
-      } catch (error) {
-        console.log(error);
+      if (res.data && typeof res.data === "object") {
+        setUser(res.data); // Ensure res.data is the user object
       }
     };
 
@@ -29,11 +24,7 @@ const Conversations = ({ conversations, currentUser }) => {
     <div className="conversation">
       {user ? (
         <>
-          <img
-            className="conversationImage"
-            src={user.photo}
-            alt={user.name}
-          />
+          <img className="conversationImage" src={user.photo} alt={user.name} />
           <span className="conversationName">{user.name || "Unknown"}</span>
         </>
       ) : (

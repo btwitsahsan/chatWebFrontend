@@ -193,6 +193,43 @@ export const postMessages = async (message) => {
 }
 
 
+export const getUsers = async (friendId) => {
+    try {
+        const res  = await axios.post(
+          `${API_URL}/api/users/getUserById?userId=` + friendId
+        );
+        return res;
+    } catch (error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+    }
+}
+
+
+
+export const conversatioFind = async (userId, friendId) => {
+    try {
+        const res  = await await axios.get(
+          `${API_URL}/api/conversations/find/${friendId}/${userId}`
+        );
+        return res;
+    } catch (error) {
+        const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+    }
+}
+
+
 
 
 
