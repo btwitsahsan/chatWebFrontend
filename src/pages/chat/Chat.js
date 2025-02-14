@@ -5,7 +5,7 @@ import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatOnline/ChatOnline";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { getConversations, getMessages } from "../../networks/Apis";
+import { getConversations, getMessages, postMessages } from "../../networks/Apis";
 
 const Chat = () => {
   const [conversations, setConversations] = useState([]);
@@ -100,8 +100,7 @@ const Chat = () => {
       receiverId,
       text: newMessage,
     });
-console.log(message)
-    const res = await postMessage(message);
+    const res = await postMessages(message);
     setMessages([...messages, res.data]);
     setNewMessage("");
   };
