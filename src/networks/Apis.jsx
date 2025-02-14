@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_URL } from "../redux/features/auth/authService";
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 
 export const getAllUsers = async () => {
     try {
-        const res  = await axios.post(`${API_URL}/users/getAllUser`);
+        const res  = await axios.post(`${API_URL}/api/users/getAllUser`);
         return res;
     } catch (error) {
         const message =
@@ -18,7 +18,7 @@ export const getAllUsers = async () => {
 }
 export const getFriendRequests = async (userId) => {
     try {
-        const res  = await axios.get(`${API_URL}/friends/requests/${userId}`);
+        const res  = await axios.get(`${API_URL}/api/friends/requests/${userId}`);
         return res;
     } catch (error) {
         const message =
@@ -32,7 +32,7 @@ export const getFriendRequests = async (userId) => {
 }
 export const getSentRequests = async (userId) => {
     try {
-        const res  = await axios.get(`${API_URL}/friends/sentRequests/${userId}`);
+        const res  = await axios.get(`${API_URL}/api/friends/sentRequests/${userId}`);
         return res;
     } catch (error) {
         const message =
@@ -46,7 +46,7 @@ export const getSentRequests = async (userId) => {
 }
 export const getFriends = async (userId) => {
     try {
-        const res  = await axios.get(`${API_URL}/friends/friends/${userId}`);
+        const res  = await axios.get(`${API_URL}/api/friends/friends/${userId}`);
         return res;
     } catch (error) {
         const message =
@@ -62,7 +62,7 @@ export const sendRequests = async (senderId , receiverId) => {
     try {
       console.log(senderId , receiverId);
         const res  = await axios.post(
-            `${API_URL}/friends/sendRequest`,
+            `${API_URL}/api/friends/sendRequest`,
             {
               senderId,
               receiverId
@@ -83,7 +83,7 @@ export const sendRequests = async (senderId , receiverId) => {
 export const requestAccept = async (requestId) => {
     try {
         const res  = await axios.post(
-            `${API_URL}/friends/acceptRequest`,
+            `${API_URL}/api/friends/acceptRequest`,
             {
               requestId,
             }
@@ -102,7 +102,7 @@ export const requestAccept = async (requestId) => {
 export const requestReject = async (requestId) => {
     try {
         const res  = await axios.post(
-            `${API_URL}/friends/rejectRequest`,
+            `${API_URL}/api/friends/rejectRequest`,
             {
               requestId,
             }
@@ -120,7 +120,7 @@ export const requestReject = async (requestId) => {
 }
 export const unFriend = async (userId, friendId) => {
     try {
-        const res  = await axios.delete(`${API_URL}/friends/unfriends/${userId}/${friendId}`)
+        const res  = await axios.delete(`${API_URL}/api/friends/unfriends/${userId}/${friendId}`)
         return res;
     } catch (error) {
         const message =
@@ -134,7 +134,7 @@ export const unFriend = async (userId, friendId) => {
 }
 export const requestCancel = async (userId, friendId) => {
     try {
-        const res  = await axios.delete(`${API_URL}/friends/cancelRequest/${userId}/${friendId}`);
+        const res  = await axios.delete(`${API_URL}/api/friends/cancelRequest/${userId}/${friendId}`);
         return res;
     } catch (error) {
         const message =
@@ -151,7 +151,7 @@ export const requestCancel = async (userId, friendId) => {
 
 export const getConversations = async (userId) => {
     try {
-        const res  = await axios.post(`${API_URL}/conversations/${userId}`);
+        const res  = await axios.post(`${API_URL}/api/conversations/${userId}`);
         return res;
     } catch (error) {
         const message =
@@ -165,7 +165,7 @@ export const getConversations = async (userId) => {
 }
 export const getMessages = async (userId) => {
     try {
-        const res  = await axios.post(`${API_URL}/messages/${userId}`);
+        const res  = await axios.post(`${API_URL}/api/messages/${userId}`);
         return res;
     } catch (error) {
         const message =
@@ -179,7 +179,7 @@ export const getMessages = async (userId) => {
 }
 export const postMessages = async (message) => {
     try {
-        const res  = await axios.post(`${API_URL}/messages`, message);
+        const res  = await axios.post(`${API_URL}/api/messages`, message);
         return res;
     } catch (error) {
         const message =
