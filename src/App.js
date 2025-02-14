@@ -26,11 +26,11 @@ function App() {
     dispatch(checkLoginStatus());
   },[dispatch])
 
-   useEffect(() => {
-      if (isLoggedIn) {
-        dispatch(getUser());
-      }
-    }, [dispatch, isLoggedIn]);
+  //  useEffect(() => {
+  //     if (isLoggedIn) {
+  //       dispatch(getUser());
+  //     }
+  //   }, [dispatch, isLoggedIn]);
 
   return (
     
