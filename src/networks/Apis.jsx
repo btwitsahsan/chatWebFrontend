@@ -60,7 +60,6 @@ export const getFriends = async (userId) => {
 }
 export const sendRequests = async (senderId , receiverId) => {
     try {
-      console.log(senderId , receiverId);
         const res  = await axios.post(
             `${API_URL}/api/friends/sendRequest`,
             {
@@ -68,7 +67,6 @@ export const sendRequests = async (senderId , receiverId) => {
               receiverId
             }
           );
-          console.log(res)
         return res;
     } catch (error) {
         const message =

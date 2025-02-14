@@ -100,7 +100,7 @@ const Chat = () => {
       receiverId,
       text: newMessage,
     });
-
+console.log(message)
     const res = await postMessage(message);
     setMessages([...messages, res.data]);
     setNewMessage("");
