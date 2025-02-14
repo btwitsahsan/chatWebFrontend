@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/home/Home";
+// import Home from "./pages/home/Home";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Login from "./pages/auth/Login";
@@ -51,12 +51,11 @@ function App() {
       <Routes>
         {/* Define the parent route */}
         <Route path="/" element={<ChildRoute />}>
-          <Route index element={<Users />} /> {/* Default child route */}
-          <Route path="/login" element={<Login />} />
+          <Route index element={isLoggedIn? <Users />: <Login/>} />
+          <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register />} />
           <Route path="/chat" element={isLoggedIn? <Chat />: <Login/>}/>
           <Route path="/profile" element={isLoggedIn?<Profile /> : <Login/>} />
-          
         </Route>
       </Routes>
       <Footer />

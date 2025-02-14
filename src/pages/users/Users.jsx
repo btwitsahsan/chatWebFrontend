@@ -3,8 +3,18 @@ import "./users.css";
 import UserList from "../../components/users/UserList";
 import RequestList from "../../components/users/RequestList";
 import FriendList from "../../components/users/FriendList";
-import axios from "axios";
 import { useSelector } from "react-redux";
+import {
+  getAllUsers,
+  getFriendRequests,
+  getFriends,
+  getSentRequests,
+  requestAccept,
+  requestCancel,
+  requestReject,
+  sendRequests,
+  unFriend,
+} from "../../networks/Apis";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -15,196 +25,79 @@ const Users = () => {
   const LoggedInUser = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    const getAllUsers = async () => {
+    const Users = async () => {
       if (!LoggedInUser?._id) return;
-      try {
-        const res = await axios.post(
-          "http://localhost:4000/api/users/getAllUser"
-        );
+      const res = await getAllUsers();
 
-        const userss = await res.data.filter(
-          (u) => u._id !== LoggedInUser?._id
-        );
-        setUsers(userss);
-      } catch (error) {
-        console.error("Error fetching friend requests:", error);
-      }
+      const userss = await res.data.filter((u) => u._id !== LoggedInUser?._id);
+      setUsers(userss);
     };
-    getAllUsers();
+    Users();
   }, [LoggedInUser]);
 
   useEffect(() => {
-    const getFriendRequests = async () => {
+    const FriendRequests = async () => {
       if (!LoggedInUser?._id) return; // Prevent unnecessary API calls
-
-      try {
-        const res = await axios.get(
-          `http://localhost:4000/api/friends/requests/${LoggedInUser._id}`
-        );
-        // console.log(res.data);
-        setRequests(res.data);
-      } catch (error) {
-        console.error("Error fetching friend requests:", error);
-      }
+      const res = await getFriendRequests(LoggedInUser?._id);
+      setRequests(res.data);
     };
 
-    getFriendRequests();
+    FriendRequests();
   }, [LoggedInUser]);
 
   useEffect(() => {
-    const getSentRequests = async () => {
+    const SentRequest = async () => {
       if (!LoggedInUser?._id) return; // Prevent unnecessary API calls
-
-      try {
-        const res = await axios.get(
-          `http://localhost:4000/api/friends/sentRequests/${LoggedInUser._id}`
-        );
-        // console.log(res.data);
-        setSentRequests(res.data);
-      } catch (error) {
-        console.error("Error fetching sent requests:", error);
-      }
+      const res = await getSentRequests(LoggedInUser?._id);
+      setSentRequests(res.data);
     };
-
-    getSentRequests();
+    SentRequest();
   }, [LoggedInUser]);
 
   useEffect(() => {
-    const getFriends = async () => {
+    const Friends = async () => {
       if (!LoggedInUser?._id) return;
-
-      try {
-        const res = await axios.get(
-          `http://localhost:4000/api/friends/friends/${LoggedInUser._id}`
-        );
-        setFriends(res.data);
-      } catch (error) {
-        console.error("Error fetching friend requests:", error);
-      }
+      const res = await getFriends(LoggedInUser?._id);
+      setFriends(res.data);
     };
-
-    getFriends();
+    Friends();
   }, [LoggedInUser]);
 
-
-
-
-
-
-
-
-
-
-
-
-  const sendRequest = async (userId) => {
-    try {
-      const res = await axios.post(
-        "http://localhost:4000/api/friends/sendRequest",
-        {
-          senderId: LoggedInUser?._id,
-          receiverId: userId,
-        }
-      );
-
-      // Logic to send a friend request
-      setSentRequests([
-        ...sentRequests,
-        users.find((user) => user._id === userId),
-      ]);
-    } catch (error) {
-      if (error && error.response && error.response.data) {
-        alert(error.response.data);
-      }
-    }
+  const sendRequest = async (receiverId) => {
+    const res = await sendRequests(LoggedInUser?._id, receiverId);
+    console.log(LoggedInUser?._id, receiverId);
+    // Logic to send a friend request
+    setSentRequests([
+      ...sentRequests,
+      users.find((user) => user._id === receiverId),
+    ]);
   };
 
   const acceptRequest = async (requestId) => {
     // Logic to accept a friend request
-    const res = await axios.post(
-      "http://localhost:4000/api/friends/acceptRequest",
-      {
-        requestId,
-      }
-    );
+    const res = await requestAccept(requestId);
     const user = requests.find((req) => req._id === requestId);
     setFriends([...friends, user]);
     setRequests(requests.filter((req) => req._id !== requestId));
   };
 
-
-
-
-
-
-
-
-
-
-
-
-  
   const rejectRequest = async (requestId) => {
-    try {
-      const res = await axios.post(
-        "http://localhost:4000/api/friends/rejectRequest",
-        {
-          requestId,
-        }
-      );
-      // Logic to reject a friend request
-      setRequests(requests.filter((req) => req._id !== requestId));
-      alert(res.data.message);
-    } catch (error) {
-      if (error && error.response && error.response.data) {
-        alert(error.response.data);
-      }
-    }
+    const res = await requestReject(requestId);
+    // Logic to reject a friend request
+    setRequests(requests.filter((req) => req._id !== requestId));
   };
 
+  const unfriend = async (friendId) => {
+    const res = await unFriend(LoggedInUser?._id, friendId);
+    // Logic to reject a friend request
+    // setRequests(requests.filter((req) => req._id !== requestId));
+  };
 
-
-
-
-
-
-
-
-
-
-  const unfriend = async (friendId)=>{
-try {
-  const res = await axios.delete(`http://localhost:4000/api/friends/unfriends/${LoggedInUser._id}/${friendId}`);
-  // Logic to reject a friend request
-  // setRequests(requests.filter((req) => req._id !== requestId));
-  alert(res.data.message);
-} catch (error) {
-  if (error && error.response && error.response.data) {
-    alert(error.response.data);
-  }
-}
-  }
-  // console.log(requests)
-
-
-
-
-
-
-  const cancelRequest = async (friendId)=>{
- 
-try {
-  const res = await axios.delete(`http://localhost:4000/api/friends/cancelRequest/${LoggedInUser._id}/${friendId}`);
-  // Logic to reject a friend request
-  // setRequests(requests.filter((req) => req._id !== requestId));
-  alert(res.data.message);
-} catch (error) {
-  if (error && error.response && error.response.data) {
-    alert(error.response.data);
-  }
-}
-  }
-  // console.log(requests)
+  const cancelRequest = async (friendId) => {
+    const res = await requestCancel(LoggedInUser?._id, friendId);
+    // Logic to reject a friend request
+    // setRequests(requests.filter((req) => req._id !== requestId));
+  };
 
   return (
     <div className="mainUsersDiv">
@@ -215,7 +108,7 @@ try {
           sendRequest={sendRequest}
           friends={friends}
           sentRequests={sentRequests}
-          unfriend = {unfriend}
+          unfriend={unfriend}
           cancelRequest={cancelRequest}
         />
       </div>
