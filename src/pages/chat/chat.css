@@ -27,7 +27,7 @@ display: flex;
     position: relative;
 }
 .chatBoxTop{
-    height: 80%;
+    height: 90%;
     overflow-y: scroll;
     padding-right: 10px;
 }
