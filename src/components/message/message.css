@@ -23,14 +23,15 @@
 .messageBottom{
     font-size: 12px;
     margin-top: 10px;
+    color: orangered;
 }
 
 .message.own{
     align-items: flex-end;
 }
 .message.own .messageText{
-    background-color: rgb(219, 214, 214);
-    color: black;
+    background-color: rgb(255, 102, 46);
+    color: white;
 }
 .message.own .messageTop{
     flex-direction: row-reverse;
