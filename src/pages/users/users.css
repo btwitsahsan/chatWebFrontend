@@ -1,11 +1,16 @@
 /* Global Styles */
 body {
   font-family: "Arial", sans-serif;
-  background-color: #f4f4f9;
+  background-color: black;
   margin: 0;
   padding: 0;
 }
+.mainUsersDiv h2{
+  color: white;
+  text-align: center;
+  font-size: 20px;
 
+}
 /* User List Styles */
 .user-list,
 .friend-list,
@@ -20,18 +25,26 @@ body {
 .request-item {
   display: flex;
   align-items: center;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
   margin-bottom: 10px;
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1); /* Transparent White */
+  border-radius: 10px;
+  backdrop-filter: blur(10px); /* Glass Blur Effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari Support */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle Shadow */
+  padding: 10px;
+  color: white !important; /* Text Color */
+}
+.pic-na-div{
+  display: flex;
+  align-items: center;
 }
 
 .user-item:hover,
 .friend-item:hover,
 .request-item:hover {
-  background-color: #e0e0e0;
+  
 }
 
 .user-profile-pic,
@@ -50,30 +63,34 @@ body {
   font-weight: 600;
 }
 
+
 .send-request-button,
 .accept-button,
 .reject-button {
   padding: 6px 12px;
   margin-left: auto;
-  background-color: #007bff;
-  color: white;
+  background-color: orangered;
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-
+.acc-rej-btn{
+  display: flex;
+  gap: 2px;
+}
 .send-request-button:hover,
 .accept-button:hover,
 .reject-button:hover {
-  background-color: #0056b3;
+  background-color: rgb(252, 111, 60);
 }
 
 .reject-button {
-  background-color: #dc3545;
+  background-color: #ff0019;
 }
 
 .reject-button:hover {
-  background-color: #c82333;
+  background-color: #ff283d;
 }
 
 /* Layout Adjustments */
@@ -94,19 +111,20 @@ body {
   min-height: calc(100vh - 5rem);
 }
 .usersDiv,
+.requestsDiv {
+  border-right: 0.5px solid #b3b3b3;
+}
+.usersDiv,
 .requestsDiv,
 .friendsDiv {
-  padding: 30px;
+  padding: 20px;
 }
 .usersDiv {
   flex: 4;
-  background-color: orangered;
 }
 .requestsDiv {
   flex: 4;
-  background-color: rgb(255, 136, 92);
 }
 .friendsDiv {
   flex: 4;
-  background-color: rgb(252, 186, 163);
 }
