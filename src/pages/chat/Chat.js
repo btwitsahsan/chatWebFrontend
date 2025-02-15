@@ -21,7 +21,7 @@ const Chat = () => {
 
   // Connect to WebSocket
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("wss://chatwebsockett.up.railway.app");
 
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
